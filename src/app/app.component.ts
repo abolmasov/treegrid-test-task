@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { sampleData } from '../assets/mock/data';
 import {
   SortService,
   ResizeService,
-  PageService,
   EditService,
   ExcelExportService,
   PdfExportService,
@@ -17,7 +16,6 @@ import { EditSettingsModel } from '@syncfusion/ej2-treegrid';
   providers: [
     SortService,
     ResizeService,
-    PageService,
     EditService,
     ExcelExportService,
     PdfExportService,
@@ -26,7 +24,6 @@ import { EditSettingsModel } from '@syncfusion/ej2-treegrid';
 })
 export class AppComponent {
   public data: Object[] = [];
-  public pageSettings: Object;
   public contextMenuItems: string[] = [];
   public editing: EditSettingsModel;
   public toolbar: string[] = [];
@@ -34,7 +31,6 @@ export class AppComponent {
 
   constructor() {
     this.editing = { allowDeleting: true, allowEditing: true, mode: 'Row' };
-    this.pageSettings = { pageSize: 10 };
     this.editparams = { params: { format: 'n' } };
   }
 
