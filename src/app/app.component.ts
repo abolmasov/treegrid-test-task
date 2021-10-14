@@ -7,6 +7,8 @@ import {
   ExcelExportService,
   PdfExportService,
   ContextMenuService,
+  ColumnChooserService,
+  ToolbarService,
 } from '@syncfusion/ej2-angular-treegrid';
 import { EditSettingsModel } from '@syncfusion/ej2-treegrid';
 
@@ -20,13 +22,15 @@ import { EditSettingsModel } from '@syncfusion/ej2-treegrid';
     ExcelExportService,
     PdfExportService,
     ContextMenuService,
+    ColumnChooserService,
+    ToolbarService,
   ],
 })
 export class AppComponent {
   public data: Object[] = [];
   public contextMenuItems: string[] = [];
   public editing: EditSettingsModel;
-  public toolbar: string[] = [];
+  public toolbar: string[] = ['ColumnChooser'];
   public editparams: Object;
 
   constructor() {
@@ -48,10 +52,6 @@ export class AppComponent {
       'PdfExport',
       'ExcelExport',
       'CsvExport',
-      'FirstPage',
-      'PrevPage',
-      'LastPage',
-      'NextPage',
     ];
   }
 }

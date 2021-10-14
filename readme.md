@@ -8,6 +8,8 @@ This TreeGrid shall be fully responsive on both PC browser (keyboard+mouse) and 
 (Note: ☑ means this context menu item is an on/off switch)
 
 Please implement 2 Context Menus on this TreeGrid:
+
+
 Context Menu 1 - Right-click or long-press a "Column Header", to pop-up these menu items:
 Style: User can set the Current column Data-Type (Text/Num/Date/Boolean/DropDownList), Default-Value (of current DataType),
 Minimum-Column-Width (when screen shrinked), Font-size, Font-color, Background-color, Alignment, Text-wrap.
@@ -16,6 +18,9 @@ Choose: User choose columns to show or hide. See https://ej2.syncfusion.com/angu
 Freeze ☑: Enable Freeze all-left-side (including current) columns, See https://ej2.syncfusion.com/angular/demos/#/bootstrap5/treegrid/frozen-column
 Filter ☑: Enable "Filter Bar" in Parent Hierarchy Mode, See https://ej2.syncfusion.com/angular/demos/#/bootstrap5/treegrid/filter
 MultiSort ☑: Enable Multi-Sort for all columns, See https://ej2.syncfusion.com/angular/demos/#/bootstrap5/treegrid/sorting
+
+
+
 Context Menu 2 - Rright-click or long-press a "Row Header (i.e. Drag Icon)", to pop-up these menu items:
 AddNext; AddChild; Del; Edit: User can Add(Next)/Add(Child)/Del/"Dialog-Edit" a row, (user can also Drag-n-drop to Move multi-selected rows).
 MultiSelect ☑: Enable user to "Multi-select" rows on PC and Mobile, See https://ej2.syncfusion.com/angular/demos/#/bootstrap5/treegrid/selection
