@@ -1,18 +1,20 @@
 <div class="wrapper">
-    <h2>Supa Dupa Table</h2>
+  <h2>Supa Dupa Table</h2>
 </div>
 
 <div class="control-section">
   <ejs-treegrid
+    #treegrid
     [dataSource]="data"
     childMapping="subtasks"
-    height="350"
     [treeColumnIndex]="1"
     id="treegridcomp"
     allowExcelExport="true"
     allowPdfExport="true"
     allowSorting="true"
     [contextMenuItems]="contextMenuItems"
+    (contextMenuOpen)="contextMenuOpen($event)"
+    (contextMenuClick)="contextMenuClick($event)"
     [editSettings]="editing"
     [toolbar]="toolbar"
     showColumnChooser="true"
