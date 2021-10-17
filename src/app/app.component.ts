@@ -36,6 +36,7 @@ export class AppComponent {
   public editing: EditSettingsModel;
   public toolbar: string[] = ['ColumnChooser'];
   public editparams: Object;
+  public selectionSettings = { type: 'Multiple', mode: 'Both' };
 
   @ViewChild('treegrid')
   public treegrid: TreeGridComponent | undefined;
