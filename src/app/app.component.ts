@@ -72,6 +72,7 @@ export class AppComponent {
       value: 'dropdownedit',
     },
   ];
+  public selectionSettings = { type: 'Multiple', mode: 'Both' };
 
   @ViewChild('treegrid')
   public treegrid: TreeGridComponent | undefined;
