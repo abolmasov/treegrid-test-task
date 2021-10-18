@@ -13,9 +13,9 @@
     allowExcelExport="true"
     allowPdfExport="true"
     allowSorting="true"
-    [contextMenuItems]="allowedTypes"
+    [contextMenuItems]="contextMenuItems"
     (contextMenuOpen)="contextMenuOpen($event)"
-    (contextMenuClick)="contextMenuClickHandler($event)"
+    (contextMenuClick)="contextMenuClick($event)"
     [editSettings]="editing"
     [toolbar]="toolbar"
     showColumnChooser="true"
@@ -33,11 +33,7 @@
         textAlign="Right"
         editType="numericedit"
       ></e-column>
-      <e-column
-        field="taskName"
-        headerText="Task Name"
-        width="190"
-      ></e-column>
+      <e-column field="taskName" headerText="Task Name" width="190"></e-column>
       <e-column
         field="startDate"
         headerText="Start Date"

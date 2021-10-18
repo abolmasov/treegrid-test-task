@@ -36,42 +36,6 @@ export class AppComponent {
   public editing: EditSettingsModel;
   public toolbar: string[] = ['ColumnChooser'];
   public editparams: Object;
-  public allowedTypes: Object[] = [
-    {
-      text: 'Text Box',
-      id: 'stringedit',
-      target: '.e-headercontent',
-      value: 'stringedit',
-    },
-    {
-      text: 'Numeric Text Box',
-      id: 'numericedit',
-      target: '.e-headercontent',
-      value: 'numericedit',
-    },
-    {
-      text: 'Date Picker',
-      id: 'datepickeredit',
-      target: '.e-headercontent',
-      value: 'datepickeredit',
-    },
-    // {
-    //   text: 'DateTimePicker',
-    //   id: 'datetimepickeredit'
-    // },
-    {
-      text: 'Checkbox',
-      id: 'booleanedit',
-      target: '.e-headercontent',
-      value: 'booleanedit',
-    },
-    {
-      text: 'DropDown List',
-      id: 'dropdownedit',
-      target: '.e-headercontent',
-      value: 'dropdownedit',
-    },
-  ];
   public selectionSettings = { type: 'Multiple', mode: 'Both' };
 
   @ViewChild('treegrid')
@@ -99,81 +63,63 @@ export class AppComponent {
     let items: Array<HTMLElement> = [].slice.call(
       document.querySelectorAll('.e-menu-item')
     );
-
-    // for (let i: number = 0; i < items.length; i++) {
-    //   items[i].setAttribute('style', 'display: none;');
-    // }
-
-    // if (elem.closest('.e-row')) {
-    //   if (
-    //     isNullOrUndefined(uid) ||
-    //     isNullOrUndefined(getValue('hasChildRecords', this.treegrid?.grid.getRowObjectFromUID(uid).data))
-    //   ) {
-    //     (arg as any).cancel = true;
-    //   } else {
-    //     let flag: boolean = getValue('expanded', this.treegrid?.grid.getRowObjectFromUID(uid).data);
-
-    //     let val: string = flag ? 'none' : 'block';
-
-    //     document
-    //       .querySelectorAll('li#expandrow')[0]
-    //       .setAttribute('style', 'display: ' + val + ';');
-
-    //     val = !flag ? 'none' : 'block';
-
-    //     document
-    //       .querySelectorAll('li#collapserow')[0]
-    //       .setAttribute('style', 'display: ' + val + ';');
-    //   }
-    // } else {
-    //   let len = this.treegrid?.element.querySelectorAll('.e-treegridexpand').length;
-    //   if (len !== 0) {
-    //     document
-    //       .querySelectorAll('li#collapseall')[0]
-    //       .setAttribute('style', 'display: block;');
-    //   } else {
-    //     document
-    //       .querySelectorAll('li#expandall')[0]
-    //       .setAttribute('style', 'display: block;');
-    //   }
-    // }
+    for (let i: number = 0; i < items.length; i++) {
+      items[i].setAttribute('style', 'display: none;');
+    }
+    if (elem.closest('.e-row')) {
+      if (
+        isNullOrUndefined(uid) ||
+        isNullOrUndefined(
+          getValue(
+            'hasChildRecords',
+            this.treegrid?.grid.getRowObjectFromUID(uid).data
+          )
+        )
+      ) {
+        (arg as any).cancel = true;
+      } else {
+        let flag: boolean = getValue(
+          'expanded',
+          this.treegrid?.grid.getRowObjectFromUID(uid).data
+        );
+        let val: string = flag ? 'none' : 'block';
+        document
+          .querySelectorAll('li#expandrow')[0]
+          .setAttribute('style', 'display: ' + val + ';');
+        val = !flag ? 'none' : 'block';
+        document
+          .querySelectorAll('li#collapserow')[0]
+          .setAttribute('style', 'display: ' + val + ';');
+      }
+    } else {
+      let len =
+        this.treegrid?.element.querySelectorAll('.e-treegridexpand').length;
+      if (len !== 0) {
+        document
+          .querySelectorAll('li#collapseall')[0]
+          .setAttribute('style', 'display: block;');
+      } else {
+        document
+          .querySelectorAll('li#expandall')[0]
+          .setAttribute('style', 'display: block;');
+      }
+    }
   }
-
   contextMenuClick(args?: MenuEventArgs): void {
-    // if (args?.item.id === 'collapserow') {
-    //   this.treegrid?.collapseRow(
-    //     this.treegrid.getSelectedRows()[0] as HTMLTableRowElement,
-    //     this.treegrid.getSelectedRecords()[0]
-    //   );
-    // } else if (args?.item.id === 'expandrow') {
-    //   this.treegrid?.expandRow(
-    //     this.treegrid.getSelectedRows()[0] as HTMLTableRowElement,
-    //     this.treegrid.getSelectedRecords()[0]
-    //   );
-    // } else if (args?.item.id === 'collapseall') {
-    //   this.treegrid?.collapseAll();
-    // } else if (args?.item.id === 'expandall') {
-    //   this.treegrid?.expandAll();
-    // }
+    if (args?.item.id === 'collapserow') {
+      this.treegrid?.collapseRow(
+        this.treegrid.getSelectedRows()[0] as HTMLTableRowElement,
+        this.treegrid.getSelectedRecords()[0]
+      );
+    } else if (args?.item.id === 'expandrow') {
+      this.treegrid?.expandRow(
+        this.treegrid.getSelectedRows()[0] as HTMLTableRowElement,
+        this.treegrid.getSelectedRecords()[0]
+      );
+    } else if (args?.item.id === 'collapseall') {
+      this.treegrid?.collapseAll();
+    } else if (args?.item.id === 'expandall') {
+      this.treegrid?.expandAll();
+    }
   }
-
-  contextMenuClickHandler(args?: MenuEventArgs): void {
-
-    // if (args?.item.id === 'collapserow') {
-    //   this.treegrid?.collapseRow(
-    //     this.treegrid.getSelectedRows()[0] as HTMLTableRowElement,
-    //     this.treegrid.getSelectedRecords()[0]
-    //   );
-    // } else if (args?.item.id === 'expandrow') {
-    //   this.treegrid?.expandRow(
-    //     this.treegrid.getSelectedRows()[0] as HTMLTableRowElement,
-    //     this.treegrid.getSelectedRecords()[0]
-    //   );
-    // } else if (args?.item.id === 'collapseall') {
-    //   this.treegrid?.collapseAll();
-    // } else if (args?.item.id === 'expandall') {
-    //   this.treegrid?.expandAll();
-    // }
-  }
-
 }
