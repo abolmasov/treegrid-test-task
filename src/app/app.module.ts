@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
+import { AppComponent, EditColumnDialog } from './app.component';
 
 // ────────────────────────────────────────────────────────────────────────────────
 // @syncfusion packages
@@ -34,10 +34,13 @@ import { NumericTextBoxAllModule } from '@syncfusion/ej2-angular-inputs';
 import { TreeGridAllModule } from '@syncfusion/ej2-angular-treegrid';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // ────────────────────────────────────────────────────────────────────────────────
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, EditColumnDialog],
   imports: [
     CommonModule,
     TreeGridAllModule,
@@ -53,6 +56,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     DatePickerModule,
     SparklineAllModule,
     BrowserModule,
+    BrowserAnimationsModule,
+    // Forms
+    FormsModule,
+    ReactiveFormsModule,
+    // Material
+    MatDialogModule,
+    MatFormFieldModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

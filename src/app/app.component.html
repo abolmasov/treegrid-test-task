@@ -3,6 +3,11 @@
 </div>
 
 <div class="control-section">
+  <!--
+    (contextMenuOpen)="contextMenuOpen($event)"
+    (contextMenuClick)="contextMenuClick($event)"
+    [contextMenuItems]="contextMenuItems"
+  -->
   <ejs-treegrid
     #treegrid
     [dataSource]="data"
@@ -13,9 +18,6 @@
     allowExcelExport="true"
     allowPdfExport="true"
     allowSorting="true"
-    [contextMenuItems]="contextMenuItems"
-    (contextMenuOpen)="contextMenuOpen($event)"
-    (contextMenuClick)="contextMenuClick($event)"
     [editSettings]="editing"
     [toolbar]="toolbar"
     showColumnChooser="true"
