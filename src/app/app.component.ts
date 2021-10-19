@@ -57,7 +57,7 @@ export class AppComponent implements OnInit {
   @ViewChild('treegrid')
   public treegrid: TreeGridComponent | undefined;
 
-  constructor(public dialog: MatDialog, private formBuilder: FormBuilder) {
+  constructor(public dialog: MatDialog) {
     this.editing = { allowDeleting: true, allowEditing: true, mode: 'Row' };
     this.editparams = { params: { format: 'n' } };
     window.addEventListener('contextmenu', (e) => e.preventDefault());
@@ -145,11 +145,13 @@ export class AppComponent implements OnInit {
   openColumnEdit(e: MouseEvent): boolean {
     e.preventDefault();
     e.stopPropagation();
-    if (
-      (e.target as Element).classList.contains('e-headertext') &&
-      e.button === 2
-    ) {
+    const target = e.target as HTMLElement;
+    if (target.classList.contains('e-headertext') && e.button === 2) {
+      const columnName = target.innerText;
       const dialogRef = this.dialog.open(EditColumnDialog, {
+        data: {
+          columnName: columnName,
+        },
         width: '400px',
       });
 
@@ -157,9 +159,15 @@ export class AppComponent implements OnInit {
         if (result === null || result === undefined) {
           return;
         }
+        this.changeColumnFontColor(result.font_color.hex, target);
       });
     }
     return false;
+  }
+
+  private changeColumnFontColor(color: string, target: HTMLElement) {
+    const element = document.querySelectorAll('.e-treecell');
+    debugger;
   }
 }
 
@@ -169,10 +177,49 @@ export class AppComponent implements OnInit {
   templateUrl: 'edit-column.html',
 })
 export class EditColumnDialog {
+  public editColumnForm: FormGroup;
+
+  public dataTypes: any[] = [
+    {
+      value: 'text',
+      viewValue: 'Text',
+    },
+    {
+      value: 'number',
+      viewValue: 'Number',
+    },
+    {
+      value: 'date',
+      viewValue: 'Date',
+    },
+    {
+      value: 'boolean',
+      viewValue: 'Boolean',
+    },
+    {
+      value: 'dropDownList',
+      viewValue: 'Dropdown list',
+    },
+  ];
   constructor(
     public dialogRef: MatDialogRef<EditColumnDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private formBuilder: FormBuilder
+  ) {
+    this.editColumnForm = this.formBuilder.group({
+      data_type: [],
+      min_width: [],
+      font_size: [],
+      font_color: [],
+      background_color: [],
+      alignment: [],
+      text_wrap: [],
+    });
+  }
+
+  processeEditColumnForm(formValue: any, isValid: boolean, $event: Event) {
+    this.dialogRef.close(formValue);
+  }
 
   cancelDelete(): void {
     this.dialogRef.close();

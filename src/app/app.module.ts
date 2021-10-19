@@ -39,6 +39,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import {
+  MAT_COLOR_FORMATS,
+  NgxMatColorPickerModule,
+  NGX_MAT_COLOR_FORMATS,
+} from '@angular-material-components/color-picker';
 @NgModule({
   declarations: [AppComponent, EditColumnDialog],
   imports: [
@@ -61,11 +69,16 @@ import { MatCardModule } from '@angular/material/card';
     FormsModule,
     ReactiveFormsModule,
     // Material
+    MatButtonModule,
     MatDialogModule,
+    MatSelectModule,
     MatFormFieldModule,
     MatCardModule,
+    MatInputModule,
+    // Colorpicker
+    NgxMatColorPickerModule,
   ],
-  providers: [],
+  providers: [{ provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
