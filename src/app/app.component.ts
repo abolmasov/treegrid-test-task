@@ -31,6 +31,17 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Color } from '@angular-material-components/color-picker';
+
+export interface ColumnUpdates {
+  alignment: any;
+  background_color: any;
+  data_type: any;
+  font_color: Color;
+  font_size: any;
+  min_width: any;
+  text_wrap: any;
+}
 
 @Component({
   selector: 'app-root',
@@ -48,7 +59,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
   public data: Object[] = [];
-  public contextMenuItems: any[] = [];
+  public columns: any;
   public editing: EditSettingsModel;
   public toolbar: string[] = ['ColumnChooser'];
   public editparams: Object;
@@ -60,98 +71,99 @@ export class AppComponent implements OnInit {
   constructor(public dialog: MatDialog) {
     this.editing = { allowDeleting: true, allowEditing: true, mode: 'Row' };
     this.editparams = { params: { format: 'n' } };
+    // ─────────────────────────────────────────────────────────────────
+    // Disable context menu
     window.addEventListener('contextmenu', (e) => e.preventDefault());
   }
 
   ngOnInit(): void {
     this.data = sampleData;
-    // this.contextMenuItems = [
-    //   { text: 'Collapse the Row', target: '.e-content', id: 'collapserow' },
-    //   { text: 'Expand the Row', target: '.e-content', id: 'expandrow' },
-    //   { text: 'Collapse All', target: '.e-headercontent', id: 'collapseall' },
-    //   { text: 'Expand All', target: '.e-headercontent', id: 'expandall' },
-    // ];
+    this.columns = [
+      {
+        field: 'taskID',
+        headerText: 'Task ID',
+        isPrimaryKey: 'true',
+        width: '80',
+        textAlign: 'Right',
+        editType: 'numericedit',
+        customAttributes: {
+          'additional-data-id': 'taskID',
+        },
+      },
+      {
+        field: 'taskName',
+        headerText: 'Task Name',
+        width: '190',
+        customAttributes: {
+          'additional-data-id': 'taskName',
+        },
+      },
+      {
+        field: 'startDate',
+        headerText: 'Start Date',
+        width: '90',
+        format: 'yMd',
+        textAlign: 'Right',
+        editType: 'datepickeredit',
+        customAttributes: {
+          'additional-data-id': 'startDate',
+        },
+      },
+      {
+        field: 'endDate',
+        headerText: 'End Date',
+        width: '90',
+        format: 'yMd',
+        textAlign: 'Right',
+        editType: 'datepickeredit',
+        customAttributes: {
+          'additional-data-id': 'endDate',
+        },
+      },
+      {
+        field: 'duration',
+        headerText: 'Duration',
+        width: '85',
+        textAlign: 'Right',
+        editType: 'numericedit',
+        customAttributes: {
+          'additional-data-id': 'duration',
+        },
+      },
+      {
+        field: 'progress',
+        headerText: 'Progress',
+        width: '90',
+        textAlign: 'Right',
+        editType: 'numericedit',
+        customAttributes: {
+          'additional-data-id': 'progress',
+        },
+      },
+      {
+        field: 'priority',
+        headerText: 'Priority',
+        width: '80',
+        textAlign: 'Left',
+        editType: 'stringedit',
+        customAttributes: {
+          'additional-data-id': 'priority',
+        },
+      },
+    ];
   }
-
-  // contextMenuOpen(arg?: BeforeOpenCloseEventArgs): void {
-  //   let elem: Element = arg?.event.target as Element;
-  //   let row: Element | any = elem.closest('.e-row');
-  //   let uid: string = row && row.getAttribute('data-uid');
-  //   let items: Array<HTMLElement> = [].slice.call(
-  //     document.querySelectorAll('.e-menu-item')
-  //   );
-  //   for (let i: number = 0; i < items.length; i++) {
-  //     items[i].setAttribute('style', 'display: none;');
-  //   }
-  //   if (elem.closest('.e-row')) {
-  //     if (
-  //       isNullOrUndefined(uid) ||
-  //       isNullOrUndefined(
-  //         getValue(
-  //           'hasChildRecords',
-  //           this.treegrid?.grid.getRowObjectFromUID(uid).data
-  //         )
-  //       )
-  //     ) {
-  //       (arg as any).cancel = true;
-  //     } else {
-  //       let flag: boolean = getValue(
-  //         'expanded',
-  //         this.treegrid?.grid.getRowObjectFromUID(uid).data
-  //       );
-  //       let val: string = flag ? 'none' : 'block';
-  //       document
-  //         .querySelectorAll('li#expandrow')[0]
-  //         .setAttribute('style', 'display: ' + val + ';');
-  //       val = !flag ? 'none' : 'block';
-  //       document
-  //         .querySelectorAll('li#collapserow')[0]
-  //         .setAttribute('style', 'display: ' + val + ';');
-  //     }
-  //   } else {
-  //     let len =
-  //       this.treegrid?.element.querySelectorAll('.e-treegridexpand').length;
-  //     if (len !== 0) {
-  //       document
-  //         .querySelectorAll('li#collapseall')[0]
-  //         .setAttribute('style', 'display: block;');
-  //     } else {
-  //       document
-  //         .querySelectorAll('li#expandall')[0]
-  //         .setAttribute('style', 'display: block;');
-  //     }
-  //   }
-  // }
-
-  // contextMenuClick(args?: MenuEventArgs): void {
-  //   if (args?.item.id === 'collapserow') {
-  //     this.treegrid?.collapseRow(
-  //       this.treegrid.getSelectedRows()[0] as HTMLTableRowElement,
-  //       this.treegrid.getSelectedRecords()[0]
-  //     );
-  //   } else if (args?.item.id === 'expandrow') {
-  //     this.treegrid?.expandRow(
-  //       this.treegrid.getSelectedRows()[0] as HTMLTableRowElement,
-  //       this.treegrid.getSelectedRecords()[0]
-  //     );
-  //   } else if (args?.item.id === 'collapseall') {
-  //     this.treegrid?.collapseAll();
-  //   } else if (args?.item.id === 'expandall') {
-  //     this.treegrid?.expandAll();
-  //   }
-  // }
 
   @HostListener('mousedown', ['$event'])
   openColumnEdit(e: MouseEvent): boolean {
     e.preventDefault();
     e.stopPropagation();
     const target = e.target as HTMLElement;
+    // ─────────────────────────────────────────────────────────────────
+    // Find closes element with attribute
+    const column: any = target?.closest('[additional-data-id]');
+    const attributeValue = column?.getAttribute('additional-data-id');
     if (target.classList.contains('e-headertext') && e.button === 2) {
-      const columnName = target.innerText;
       const dialogRef = this.dialog.open(EditColumnDialog, {
-        data: {
-          columnName: columnName,
-        },
         width: '400px',
       });
 
@@ -159,15 +171,25 @@ export class AppComponent implements OnInit {
         if (result === null || result === undefined) {
           return;
         }
-        this.changeColumnFontColor(result.font_color.hex, target);
+        this.updateColumnParams(result, attributeValue);
       });
     }
     return false;
   }
 
-  private changeColumnFontColor(color: string, target: HTMLElement) {
-    const element = document.querySelectorAll('.e-treecell');
-    debugger;
+  private updateColumnParams(data: ColumnUpdates, attributeValue: string) {
+    if (data.font_color && data.font_color.hex && attributeValue) {
+      this.updateFontColor(data.font_color.hex, attributeValue);
+    }
+  }
+
+  private updateFontColor(color: string, attributeValue: string) {
+    const elements = document.querySelectorAll(
+      `[additional-data-id=${attributeValue}]`
+    );
+    for (let index = 0; index < elements.length; index++) {
+      (elements[index] as HTMLElement).style.color = `#${color}`;
+    }
   }
 }
 
