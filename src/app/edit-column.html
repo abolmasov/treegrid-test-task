@@ -37,6 +37,19 @@
         ></ngx-mat-color-toggle>
         <ngx-mat-color-picker #font_color_picker></ngx-mat-color-picker>
       </mat-form-field>
+      <mat-form-field class="w100" appearance="outline">
+        <mat-label>Background color</mat-label>
+        <input
+          matInput
+          [ngxMatColorPicker]="bg_color_picker"
+          formControlName="background_color"
+        />
+        <ngx-mat-color-toggle
+          matSuffix
+          [for]="bg_color_picker"
+        ></ngx-mat-color-toggle>
+        <ngx-mat-color-picker #bg_color_picker></ngx-mat-color-picker>
+      </mat-form-field>
     </mat-card-content>
     <mat-card-actions align="end">
       <button type="submit" mat-raised-button color="primary">Edit</button>

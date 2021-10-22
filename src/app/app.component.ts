@@ -181,6 +181,9 @@ export class AppComponent implements OnInit {
     if (data.font_color && data.font_color.hex && attributeValue) {
       this.updateFontColor(data.font_color.hex, attributeValue);
     }
+    if (data.background_color && data.background_color.hex && attributeValue) {
+      this.updateBgColor(data.background_color.hex, attributeValue);
+    }
   }
 
   private updateFontColor(color: string, attributeValue: string) {
@@ -189,6 +192,15 @@ export class AppComponent implements OnInit {
     );
     for (let index = 0; index < elements.length; index++) {
       (elements[index] as HTMLElement).style.color = `#${color}`;
+    }
+  }
+
+  private updateBgColor(color: string, attributeValue: string) {
+    const elements = document.querySelectorAll(
+      `[additional-data-id=${attributeValue}]`
+    );
+    for (let index = 0; index < elements.length; index++) {
+      (elements[index] as HTMLElement).style.backgroundColor = `#${color}`;
     }
   }
 }
